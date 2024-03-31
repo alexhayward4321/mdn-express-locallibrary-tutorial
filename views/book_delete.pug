@@ -1,0 +1,25 @@
+extends layout 
+
+block content
+    h1 #{title}: #{book.title}
+
+    if bookInstances.length
+        p #[strong You must delete the following book instances before you are able to delete this book]
+        div(style='margin-left:20px;margin-top:20px')
+            h4 Book Instances
+            ul
+            each bookInstance in bookInstances 
+                li 
+                    a(href=bookInstance.url) #{bookInstance.title}
+                    | (#{bookInstance.author})
+    else 
+    p Do you really want to delete this Book?
+
+    form(method='POST')
+      div.form-group
+        input#authorid.form-control(type='hidden', name='bookid', value=book._id )
+
+      button.btn.btn-primary(type='submit') Delete
+    
+
+    
